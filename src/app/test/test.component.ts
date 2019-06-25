@@ -16,7 +16,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog(): void {
+  showDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '450px',
       height: '230px'
