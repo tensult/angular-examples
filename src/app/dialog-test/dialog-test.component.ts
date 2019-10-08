@@ -4,13 +4,13 @@ import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-dialog-test',
+  templateUrl: './dialog-test.component.html',
+  styleUrls: ['./dialog-test.component.css']
 })
-export class TestComponent implements OnInit {
+export class DialogTestComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit() {

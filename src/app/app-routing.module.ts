@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TestComponent } from './test/test.component';
+import { DialogTestComponent } from './dialog-test/dialog-test.component';
+import { DynamicFormFieldComponent } from './dynamic-form-field/dynamic-form-field.component';
 
 const routes: Routes = [
-  { path: '', component: TestComponent }
+  { path: 'dialog', component: DialogTestComponent },
+  { path: 'dynamic-form-field', component: DynamicFormFieldComponent }
 ];
 
 @NgModule({

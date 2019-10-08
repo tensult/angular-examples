@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-form-field>
+    <mat-select placeholder="Select Type" [formControl]="questionForm.controls['type']" [errorStateMatcher]="matcher">
+      <mat-option value="MultipleChoice" selected="true">Multiple Choice</mat-option>
+      <mat-option value="MultipleAnswers">Multiple Answers</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Title" [formControl]="questionForm.controls['title']"></textarea>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let choice of questionForm.controls['choices'].controls; let i = index;">
+    <input matInput placeholder="Add Choice {{i+1}}" [formControl]="choice" (keyup.enter)="addChoice(i)" />
+    <mat-icon matSuffix *ngIf="questionForm.controls['choices'].controls.length > 1" (click)="removeChoice(i)">close
+    </mat-icon>
+  </mat-form-field>
+</div>
