@@ -15,6 +15,8 @@ export class DynamicFormFieldComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  submittedValue: string;
+
   ngOnInit() {
     this.choicesControl = new FormArray([
       new FormControl(undefined, [
@@ -43,5 +45,10 @@ export class DynamicFormFieldComponent implements OnInit {
 
   removeChoice(index) {
     this.choicesControl.removeAt(index);
+  }
+
+  onSubmit() {
+    this.submittedValue = JSON.stringify(this.questionForm.value, null, 2);
+    this.questionForm.reset();
   }
 }

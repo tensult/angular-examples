@@ -1,6 +1,7 @@
 <div class="container">
   <mat-form-field>
-    <mat-select placeholder="Select Type" [formControl]="questionForm.controls['type']" [errorStateMatcher]="matcher">
+    <mat-select placeholder="Select Question Type" [formControl]="questionForm.controls['type']"
+      [errorStateMatcher]="matcher">
       <mat-option value="MultipleChoice" selected="true">Multiple Choice</mat-option>
       <mat-option value="MultipleAnswers">Multiple Answers</mat-option>
     </mat-select>
@@ -14,4 +15,10 @@
     <mat-icon matSuffix *ngIf="questionForm.controls['choices'].controls.length > 1" (click)="removeChoice(i)">close
     </mat-icon>
   </mat-form-field>
+
+  <div class="output" *ngIf="!questionForm.dirty && submittedValue">
+    <pre>{{submittedValue}}</pre>
+  </div>
+
+  <button mat-raised-button (click)="onSubmit()">Submit</button>
 </div>
