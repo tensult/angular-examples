@@ -47,8 +47,15 @@ export class DynamicFormFieldComponent implements OnInit {
     this.choicesControl.removeAt(index);
   }
 
+  resetForm() {
+    this.questionForm.reset();
+    for (let i = 1; i < this.choicesControl.controls.length; i++) {
+      this.choicesControl.removeAt(i);
+    }
+  }
+
   onSubmit() {
     this.submittedValue = JSON.stringify(this.questionForm.value, null, 2);
-    this.questionForm.reset();
+    this.resetForm();
   }
 }
