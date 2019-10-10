@@ -1,24 +1,51 @@
 <div class="container">
+  <p>
+    Example for Dynamic form fields and custom validator function.
+  </p>
   <mat-form-field>
     <mat-select placeholder="Select Question Type" [formControl]="questionForm.controls['type']"
       [errorStateMatcher]="matcher">
       <mat-option value="MultipleChoice" selected="true">Multiple Choice</mat-option>
       <mat-option value="MultipleAnswers">Multiple Answers</mat-option>
     </mat-select>
+    <mat-error *ngIf="questionForm.controls['type'].hasError('required')">
+      Type is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <textarea matInput placeholder="Title" [formControl]="questionForm.controls['title']"></textarea>
+    <mat-error *ngIf="questionForm.controls['title'].hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field *ngFor="let choice of questionForm.controls['choices'].controls; let i = index;">
-    <input matInput placeholder="Add Choice {{i+1}}" [formControl]="choice" (keyup.enter)="addChoice(i)" />
-    <mat-icon matSuffix *ngIf="questionForm.controls['choices'].controls.length > 1" (click)="removeChoice(i)">close
+  <mat-form-field class="choice" *ngFor="let choice of choicesControl.controls; let i = index;">
+    <input matInput placeholder="Add Choice {{i+1}}" [formControl]="choice.controls['value']"
+      (keyup.enter)="addChoice(i)" />
+    <mat-checkbox matSuffix *ngIf="questionForm.controls['type'].value" [formControl]="choice.controls['isAnswer']"
+      (change)="markAnswer($event, i)">Answer</mat-checkbox>
+    <mat-icon matSuffix *ngIf="questionForm.controls['choices'].controls.length > 1" (click)="removeChoice(i)">
+      cancel
     </mat-icon>
+    <mat-error *ngIf="choice.controls['value'].hasError('required')">
+      Choice value is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="choice.controls['value'].hasError('notUnique')">
+      Choice value should be <strong>unique</strong>
+    </mat-error>
   </mat-form-field>
+
+  <mat-error *ngIf="choicesControl.hasError('lessChoices')">
+    Add at least <strong>2 choices</strong>
+  </mat-error>
+
+  <mat-error *ngIf="choicesControl.hasError('noAnswers')">
+    Mark at least <strong>one choice</strong> as answer
+  </mat-error>
 
   <div class="output" *ngIf="!questionForm.dirty && submittedValue">
     <pre>{{submittedValue}}</pre>
   </div>
 
-  <button mat-raised-button (click)="onSubmit()">Submit</button>
+  <button class="submit" mat-raised-button (click)="onSubmit()">Submit</button>
 </div>

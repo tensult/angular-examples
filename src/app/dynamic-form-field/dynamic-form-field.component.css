@@ -6,3 +6,16 @@
 .container>* {
   width: 100%;
 }
+
+button.submit {
+  margin-top: 10px;
+}
+
+.choice {
+  margin-bottom: 20px;
+}
+
+.choice mat-checkbox {
+  margin-right: 10px;
+  vertical-align: super;
+}
