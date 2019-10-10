@@ -19,7 +19,7 @@ export class DialogExampleComponent implements OnInit {
   showDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '150px',
-      height: '60px'
+      height: '100px'
     });
     setTimeout(() => {
       dialogRef.close();
