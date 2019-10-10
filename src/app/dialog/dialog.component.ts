@@ -12,10 +12,6 @@ export class DialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogExampleComponent>) { }
 
   ngOnInit() {
-    this.dialogRef.updatePosition({
-      top: `30px`,
-      right: `40px`
-    });
   }
 
 }
