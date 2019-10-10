@@ -4,11 +4,11 @@ import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
-  selector: 'app-dialog-test',
-  templateUrl: './dialog-test.component.html',
-  styleUrls: ['./dialog-test.component.css']
+  selector: 'app-dialog-example',
+  templateUrl: './dialog-example.component.html',
+  styleUrls: ['./dialog-example.component.css']
 })
-export class DialogTestComponent implements OnInit {
+export class DialogExampleComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {
   }

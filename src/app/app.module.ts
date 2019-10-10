@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DialogTestComponent } from './dialog-test/dialog-test.component';
+import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +13,7 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DialogTestComponent,
+    DialogExampleComponent,
     DialogComponent,
     DynamicFormFieldComponent,
     HeaderComponent
