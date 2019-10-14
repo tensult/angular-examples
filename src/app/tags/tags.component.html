@@ -1,0 +1,33 @@
+<div class="container">
+  <p>Tags example</p>
+
+  <table class="tag" cellspacing="0">
+    <tr *ngFor="let tag of tagsControl.controls; let i = index;">
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Tag Name" [errorStateMatcher]="matcher" [formControl]="tag.controls['name']"
+            (keyup.enter)="addTag(i)" />
+          <mat-error *ngIf="tag.controls['name'].hasError('notUnique')">
+            Tag name should be <strong>unique</strong>
+          </mat-error>
+          <mat-error *ngIf="tag.controls['name'].hasError('required')">
+            Tag name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Tag Value" [formControl]="tag.controls['value']" (keyup.enter)="addTag(i)" />
+          <mat-icon matSuffix *ngIf="tagsControl.controls.length > 1" (click)="removeTag(i)">
+            cancel
+          </mat-icon>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <div class="output" *ngIf="!tagsControl.dirty && submittedValue">
+    <pre>{{submittedValue}}</pre>
+  </div>
+  <button class="submit" mat-raised-button (click)="onSubmit()">Submit</button>
+</div>

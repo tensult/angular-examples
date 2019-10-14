@@ -13,7 +13,8 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput placeholder="Title" [formControl]="questionForm.controls['title']"></textarea>
+    <textarea matInput placeholder="Title" [formControl]="questionForm.controls['title']"
+      [errorStateMatcher]="matcher"></textarea>
     <mat-error *ngIf="questionForm.controls['title'].hasError('required')">
       Title is <strong>required</strong>
     </mat-error>
@@ -21,13 +22,13 @@
 
   <mat-form-field class="choice" *ngFor="let choice of choicesControl.controls; let i = index;">
     <input matInput placeholder="Add Choice {{i+1}}" [formControl]="choice.controls['value']"
-      (keyup.enter)="addChoice(i)" />
+      (keyup.enter)="addChoice(i)" [errorStateMatcher]="matcher" />
     <mat-checkbox matSuffix *ngIf="questionForm.controls['type'].value" [formControl]="choice.controls['isAnswer']"
       (change)="markAnswer($event, i)">Answer</mat-checkbox>
-    <mat-icon matSuffix *ngIf="questionForm.controls['choices'].controls.length > 1" (click)="removeChoice(i)">
+    <mat-icon matSuffix *ngIf="choicesControl.controls.length > 1" (click)="removeChoice(i)">
       cancel
     </mat-icon>
-    <mat-error *ngIf="choice.controls['value'].hasError('required')">
+    <mat-error *ngIf="!choice.controls['value'].valid && choice.controls['value'].hasError('required')">
       Choice value is <strong>required</strong>
     </mat-error>
     <mat-error *ngIf="choice.controls['value'].hasError('notUnique')">

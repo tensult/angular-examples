@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './ng-material.module';
 import { DynamicFormFieldComponent } from './dynamic-form-field/dynamic-form-field.component';
 import { HeaderComponent } from './header/header.component';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
     DialogExampleComponent,
     DialogComponent,
     DynamicFormFieldComponent,
-    HeaderComponent
+    HeaderComponent,
+    TagsComponent
   ],
   imports: [
     AngularMaterialModule,

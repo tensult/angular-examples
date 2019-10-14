@@ -46,6 +46,8 @@ export class DynamicFormFieldComponent implements OnInit {
           valueControl.setErrors({ notUnique: true });
           errorChoices[index.toString()] = choiceValue;
         }
+      } else {
+        valueControl.setErrors({ required: true });
       }
     });
     return errorChoices;
