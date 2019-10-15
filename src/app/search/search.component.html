@@ -7,7 +7,7 @@
       {{currentSearchFieldName? searchFields[currentSearchFieldName].displayValue: 'Search'}}
     </mat-label>
 
-    <input matInput
+    <input matInput #searchInput
       placeholder="Enter {{currentSearchFieldName? searchFields[currentSearchFieldName].displayValue: 'field name'}}"
       #trigger="matAutocompleteTrigger" [formControl]="searchInputControl" [matAutocomplete]="autoFieldNames"
       (keyup.enter)="handleSearchInputEnter($event, trigger)" [errorStateMatcher]="matcher" />
@@ -25,11 +25,18 @@
       cancel
     </mat-icon>
   </mat-form-field>
-  <mat-chip-list #chipList>
+  <mat-chip-list #chipList class="searchFilterChips">
     <mat-chip *ngFor="let searchFilter of searchFilters; let i = index;" [selectable]="selectable"
-      [removable]="removable" (removed)="removeSearchFilter(i)">
+      [removable]="removable" matTooltip="Click to edit" (click)="handleSearchFilterSelection(i)"
+      (removed)="removeSearchFilter(i)">
       {{searchFilter.name}}: {{searchFilter.value}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
+  <div *ngIf="searchFiltersJSON">
+    <h4>Search Filters:</h4>
+    <pre>
+{{searchFiltersJSON}}
+  </pre>
+  </div>
 </div>

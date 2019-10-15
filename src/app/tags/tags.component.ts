@@ -29,12 +29,6 @@ export class TagsComponent implements OnInit {
     });
   }
 
-  moveToAddValue(event) {
-    const element = event.srcElement.nextElementSibling; // get the sibling element
-    if (element) {
-      return element.focus();
-    }
-  }
   tagsValidator(tagsControl: FormArray) {
     const tagNames = tagsControl.controls.reduce((tagNamesObj, tagControl: FormGroup) => {
       const nameControl = tagControl.controls.name;

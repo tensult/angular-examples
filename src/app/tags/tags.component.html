@@ -5,8 +5,7 @@
     <tr *ngFor="let tag of tagsControl.controls; let i = index;">
       <td>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Tag Name" [errorStateMatcher]="matcher" [formControl]="tag.controls['name']"
-            (keyup.enter)="moveToAddValue($event)" />
+          <input matInput placeholder="Tag Name" [errorStateMatcher]="matcher" [formControl]="tag.controls['name']" />
           <mat-error *ngIf="tag.controls['name'].hasError('notUnique')">
             Tag name should be <strong>unique</strong>
           </mat-error>

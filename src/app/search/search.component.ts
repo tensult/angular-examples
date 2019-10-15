@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MyErrorStateMatcher } from '../utils';
 import { FormControl, Validators } from '@angular/forms';
 import { IDictionary } from '../types/dictionary';
@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ObjectUtil } from '../utils/object';
 import { Observable } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-search',
@@ -14,6 +15,9 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 })
 export class SearchComponent implements OnInit {
   searchInputControl: FormControl;
+
+  @ViewChild('searchInput', { static: true })
+  searchInput: ElementRef;
 
   selectable = true;
   removable = true;
@@ -24,10 +28,12 @@ export class SearchComponent implements OnInit {
   searchFields: IDictionary<any>;
   filteredSearchFields: Observable<IDictionary<any>>;
   currentSearchFieldName: string;
+  searchFiltersJSON: string;
 
   handleSearchInputEnter(event, autoCompleteObj: MatAutocompleteTrigger) {
     if (this.currentSearchFieldName && this.searchInputControl.valid) {
       this.searchFilters.push({ name: this.currentSearchFieldName, value: this.searchInputControl.value });
+      this.searchFiltersJSON = JSON.stringify(this.searchFilters, null, 2);
       this.clear();
       autoCompleteObj.closePanel();
     }
@@ -36,6 +42,14 @@ export class SearchComponent implements OnInit {
   handleSearchFieldSelection(searchFieldName) {
     this.currentSearchFieldName = searchFieldName;
     this.searchInputControl.patchValue('');
+  }
+
+  handleSearchFilterSelection(index) {
+    const clickedSearchFilter = this.searchFilters[index];
+    this.currentSearchFieldName = clickedSearchFilter.name;
+    this.searchInputControl.patchValue(clickedSearchFilter.value);
+    this.removeSearchFilter(index);
+    this.searchInput.nativeElement.focus();
   }
 
   clear() {
