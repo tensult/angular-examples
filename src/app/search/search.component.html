@@ -10,7 +10,7 @@
     <input matInput #searchInput
       placeholder="Enter {{currentSearchFieldName? searchFields[currentSearchFieldName].displayValue: 'field name'}}"
       #trigger="matAutocompleteTrigger" [formControl]="searchInputControl" [matAutocomplete]="autoFieldNames"
-      (keyup.enter)="handleSearchInputEnter($event, trigger)" [errorStateMatcher]="matcher" />
+      (keyup.enter)="handleSearchInputEnter(trigger)" [errorStateMatcher]="matcher" />
     <mat-hint align="start" *ngIf="currentSearchFieldName && searchFields[currentSearchFieldName].hint">
       {{searchFields[currentSearchFieldName].hint}}
     </mat-hint>
@@ -24,11 +24,14 @@
     <mat-icon matSuffix *ngIf="searchInputControl.value || currentSearchFieldName" (click)="clear()">
       cancel
     </mat-icon>
+    <mat-error *ngIf="searchInputControl.hasError('notUnique')">
+      {{searchFields[currentSearchFieldName].displayValue}} should have <strong>unique</strong> values
+    </mat-error>
   </mat-form-field>
   <mat-chip-list #chipList class="searchFilterChips">
     <mat-chip *ngFor="let searchFilter of searchFilters; let i = index;" [selectable]="selectable"
-      [removable]="removable" matTooltip="Click to edit" (click)="handleSearchFilterSelection(i)"
-      (removed)="removeSearchFilter(i)">
+      [removable]="removable" matTooltip="Click to edit" color="warn" [selected]="i === searchFilterErrorIndex"
+      (click)="handleSearchFilterSelection(i)" (removed)="removeSearchFilter(i)">
       {{searchFilter.name}}: {{searchFilter.value}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
