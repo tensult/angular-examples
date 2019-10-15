@@ -10,6 +10,7 @@ import { AngularMaterialModule } from './ng-material.module';
 import { DynamicFormFieldComponent } from './dynamic-form-field/dynamic-form-field.component';
 import { HeaderComponent } from './header/header.component';
 import { TagsComponent } from './tags/tags.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TagsComponent } from './tags/tags.component';
     DialogComponent,
     DynamicFormFieldComponent,
     HeaderComponent,
-    TagsComponent
+    TagsComponent,
+    SearchComponent
   ],
   imports: [
     AngularMaterialModule,

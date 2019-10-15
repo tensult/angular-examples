@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container>* {
+  width: 100%;
+}
+
+button.submit {
+  margin-top: 10px;
+}

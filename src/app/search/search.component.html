@@ -1,0 +1,35 @@
+<div class="container">
+  <p>
+    Example for Search bar
+  </p>
+  <mat-form-field class="search">
+    <mat-label>
+      {{currentSearchFieldName? searchFields[currentSearchFieldName].displayValue: 'Search'}}
+    </mat-label>
+
+    <input matInput
+      placeholder="Enter {{currentSearchFieldName? searchFields[currentSearchFieldName].displayValue: 'field name'}}"
+      #trigger="matAutocompleteTrigger" [formControl]="searchInputControl" [matAutocomplete]="autoFieldNames"
+      (keyup.enter)="handleSearchInputEnter($event, trigger)" [errorStateMatcher]="matcher" />
+    <mat-hint align="start" *ngIf="currentSearchFieldName && searchFields[currentSearchFieldName].hint">
+      {{searchFields[currentSearchFieldName].hint}}
+    </mat-hint>
+
+    <mat-autocomplete #autoFieldNames="matAutocomplete"
+      (optionSelected)='handleSearchFieldSelection($event.option.value)'>
+      <mat-option *ngFor="let searchField of filteredSearchFields | async | keyvalue" [value]="searchField.key">
+        {{searchField.value.displayValue}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-icon matSuffix *ngIf="searchInputControl.value || currentSearchFieldName" (click)="clear()">
+      cancel
+    </mat-icon>
+  </mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let searchFilter of searchFilters; let i = index;" [selectable]="selectable"
+      [removable]="removable" (removed)="removeSearchFilter(i)">
+      {{searchFilter.name}}: {{searchFilter.value}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>

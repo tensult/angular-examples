@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 import { DynamicFormFieldComponent } from './dynamic-form-field/dynamic-form-field.component';
 import { TagsComponent } from './tags/tags.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: 'dialog', component: DialogExampleComponent },
   { path: 'dynamic-form-field', component: DynamicFormFieldComponent },
-  { path: 'tags', component: TagsComponent }
+  { path: 'search', component: SearchComponent },
+  { path: 'tags', component: TagsComponent },
 ];
 
 @NgModule({
